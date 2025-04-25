@@ -7,6 +7,14 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Liam\'s Portfolio',
   description: 'A portfolio website showcasing product design work',
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -17,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@github/mona-sans@latest/dist/mona-sans.css" />
       </head>
       <body className="font-mona-sans">
