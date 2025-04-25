@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CaseStudy } from '../../lib/data';
+import { getAssetPath } from '../../lib/utils';
 
 interface CaseStudyCardProps {
   caseStudy: CaseStudy;
@@ -10,6 +11,18 @@ interface CaseStudyCardProps {
 
 export const CaseStudyCard = ({ caseStudy, isLarge = false }: CaseStudyCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [thumbnailPath, setThumbnailPath] = useState(caseStudy.thumbnailUrl || '');
+  const [overlayPath, setOverlayPath] = useState(caseStudy.overlayImageUrl || '');
+  
+  // Update paths when component mounts (client-side only)
+  useEffect(() => {
+    if (caseStudy.thumbnailUrl) {
+      setThumbnailPath(getAssetPath(caseStudy.thumbnailUrl));
+    }
+    if (caseStudy.overlayImageUrl) {
+      setOverlayPath(getAssetPath(caseStudy.overlayImageUrl));
+    }
+  }, [caseStudy.thumbnailUrl, caseStudy.overlayImageUrl]);
   
   return (
     <div 
@@ -26,11 +39,11 @@ export const CaseStudyCard = ({ caseStudy, isLarge = false }: CaseStudyCardProps
     >
       {/* Background image with parallax effect */}
       <div className="absolute inset-0 overflow-hidden">
-        {caseStudy.thumbnailUrl ? (
+        {thumbnailPath ? (
           <div 
             className="w-full h-full bg-cover bg-center transition-all duration-700 ease-out"
             style={{ 
-              backgroundImage: `url(${caseStudy.thumbnailUrl})`,
+              backgroundImage: `url(${thumbnailPath})`,
               transform: isHovered ? 'scale(1.12)' : 'scale(1)',
               transformOrigin: 'center center',
               transition: 'transform 0.7s ease-out'
@@ -48,11 +61,11 @@ export const CaseStudyCard = ({ caseStudy, isLarge = false }: CaseStudyCardProps
         )}
         
         {/* Overlay image (Design.png) if available */}
-        {caseStudy.overlayImageUrl && (
-          <div 
+        {overlayPath && (
+          <div
             className="absolute inset-0 bg-contain bg-right bg-no-repeat transition-all duration-700 ease-out z-10 drop-shadow-lg"
-            style={{ 
-              backgroundImage: `url(${caseStudy.overlayImageUrl})`,
+            style={{
+              backgroundImage: `url(${overlayPath})`,
               transform: isHovered ? 'scale(1.04) translateY(-12px) translateX(-30px)' : 'scale(1) translateX(30px)',
               transformOrigin: 'center right',
               transition: 'transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), filter 0.8s ease-out',

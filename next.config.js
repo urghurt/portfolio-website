@@ -2,9 +2,12 @@
 const nextConfig = {
   output: 'export',
   images: { unoptimized: true },
-  basePath: process.env.NODE_ENV === 'production' ? '/portfolio-website' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/portfolio-website/' : '',
-  trailingSlash: true,
+  // For GitHub Pages deployment
+  ...(process.env.DEPLOY_TARGET === 'github' ? {
+    basePath: '/portfolio-website',
+    assetPrefix: '/portfolio-website/',
+    trailingSlash: true,
+  } : {}),
 };
 
 module.exports = nextConfig;

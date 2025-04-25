@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export",
-    "deploy": "next build && touch out/.nojekyll && git add out/ && git commit -m \"Deploy to gh-pages\" && git subtree push --prefix out origin gh-pages"
+    "build:github": "DEPLOY_TARGET=github next build",
+    "deploy:github": "npm run build:github && touch out/.nojekyll && git add out/ && git commit -m \"Deploy to gh-pages\" && git subtree push --prefix out origin gh-pages",
+    "deploy": "npm run deploy:github"
   },
   "dependencies": {
     "@next/font": "^14.2.15",
