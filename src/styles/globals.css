@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 12, 14, 22;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  position: relative;
+}
+
+/* Grain overlay effect */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('/noise.svg');
+  background-repeat: repeat;
+  background-size: 100px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: soft-light;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: textShimmer 8s linear infinite;
+}
+
+@keyframes textShimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Enhanced animations for gradient orbs with more subtle movement */
+@keyframes shimmer {
+  0% { opacity: 0.2; filter: blur(40px); transform: translate(0, 0) scale(1); }
+  25% { opacity: 0.25; filter: blur(38px); transform: translate(-15px, -10px) scale(1.02); }
+  50% { opacity: 0.3; filter: blur(36px); transform: translate(10px, 15px) scale(1.04); }
+  75% { opacity: 0.25; filter: blur(38px); transform: translate(15px, -5px) scale(1.02); }
+  100% { opacity: 0.2; filter: blur(40px); transform: translate(0, 0) scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+  33% { transform: translate(-20px, -15px) scale(1.03); opacity: 0.2; }
+  66% { transform: translate(15px, 20px) scale(0.97); opacity: 0.18; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.15; }
+}
+
+.animate-shimmer {
+  animation: shimmer 60s ease-in-out infinite;
+}
+
+.animate-shimmer-delay-1 {
+  animation: shimmer 75s ease-in-out 10s infinite;
+}
+
+.animate-shimmer-delay-2 {
+  animation: shimmer 80s ease-in-out 20s infinite;
+}
+
+.animate-shimmer-delay-3 {
+  animation: shimmer 70s ease-in-out 15s infinite;
+}
+
+.animate-shimmer-delay-4 {
+  animation: shimmer 85s ease-in-out 5s infinite;
+}
+
+.animate-float {
+  animation: float 90s ease-in-out infinite;
+}
+
+.animate-float-delay-1 {
+  animation: float 100s ease-in-out 25s infinite;
+}
+
+.animate-float-delay-2 {
+  animation: float 95s ease-in-out 10s infinite;
+}
+
+/* Custom animation for gradient orbs */
+@keyframes gradientShift {
+  0% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-5px) scale(1.05); opacity: 0.4; }
+  100% { transform: translateY(0) scale(1); opacity: 0.3; }
+}
+
+.animate-gradient {
+  animation: gradientShift 10s ease-in-out infinite;
+}
+
+.animate-gradient-delay-1 {
+  animation: gradientShift 12s ease-in-out 1s infinite;
+}
+
+.animate-gradient-delay-2 {
+  animation: gradientShift 8s ease-in-out 2s infinite;
+}
+
+.animate-gradient-delay-3 {
+  animation: gradientShift 15s ease-in-out 1.5s infinite;
+}
+
+.animate-gradient-delay-4 {
+  animation: gradientShift 9s ease-in-out 0.5s infinite;
+}
